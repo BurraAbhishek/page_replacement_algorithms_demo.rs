@@ -1,5 +1,5 @@
 [package]
-name = "page_replacement_algorithms_demo.rs"
+name = "page_replacement_algorithms_demo_rs"
 version = "0.1.0"
 edition = "2018"
 
