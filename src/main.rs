@@ -1,10 +1,15 @@
-#[path = "page.rs"] mod page;
-use page as new_page;
+#[path = "input.rs"]
+mod input_rs;
+#[path = "page.rs"]
+mod page_rs;
 
 fn main() {
-    let demopage = new_page::Page {
+    let demopage = page_rs::Page {
         ..Default::default()
     };
-    demopage.generate();
+    let page2 = demopage.generate();
+    println!("Number of frames: ?");
+    let _frames: u8 = input_rs::input_u8();
+    let _pagestring = page2.get_page_string();
     println!("Execution successful. This work is still under development");
 }
