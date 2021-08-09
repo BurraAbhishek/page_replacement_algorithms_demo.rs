@@ -15,6 +15,16 @@ pub fn lru(mut p: PageReplacement) -> PageReplacement {
         let mut prev: Vec<String> = Vec::<String>::new();
         // The current frame
         let mut current: Vec<String> = Vec::<String>::new();
+        // Sort the log variable based on frame usage
+        let strval: String = p.page_reference.get(i).unwrap().into();
+        if log.contains(&strval) {
+            for j in 0..log.len() {
+                if log.get(j).unwrap_or(&String::new()) == &strval {
+                    log.remove(j);
+                }
+            }
+        }
+        log.push_back(strval);
         // If not the first frame
         if i > 0 {
             // Copy the previous frame from the original frame to prev and current
@@ -24,12 +34,6 @@ pub fn lru(mut p: PageReplacement) -> PageReplacement {
                 prev.push(strval);
                 let strval = String::from(val.unwrap_or(&String::new()));
                 current.push(strval);
-                let strval: String = p.page_reference.get(i).unwrap().into();
-                if log.contains(&strval) {
-                    let index = log.iter().position(|x| *x == strval).unwrap();
-                    log.remove(index);
-                }
-                log.push_back(strval);
             }
             // If current does not have the page, it means page is not in memory
             // Lookup for the page
